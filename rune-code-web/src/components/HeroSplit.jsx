@@ -30,101 +30,163 @@ const HeroSplit = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
-              <h1 className="font-display text-white text-4xl lg:text-5xl xl:text-6xl tracking-[0.12em] leading-[1.15] italic mb-8">
-                ENCUENTRA<br />
-                TU ESENCIA<br />
-                CON RUNE<br />
-                CODE
-              </h1>
+
+<section className="hero">
+            <h4 className="hero-title">
+  <span className="hero-line">ENCUENTRA</span>
+  <span className="hero-line">TU ESENCIA</span>
+  <span className="hero-line">CON RUNE</span>
+  <span className="hero-line">CODE</span>
+</h4>
+
+
               
               <Link to="/catalogo" className="inline-block group">
-                <span className="font-body text-sm tracking-[0.15em] text-[var(--color-orange)] group-hover:text-white transition-colors duration-300">
+                <span className="font-body text-sm tracking-[0.15em] text-white group-hover:text-white/80 transition-colors duration-300">
                   VER COLECCIÓN
                 </span>
-                <div className="h-[1px] bg-[var(--color-orange)] mt-2 group-hover:bg-white transition-colors duration-300" />
+                <div className="h-[1px] bg-white mt-2 group-hover:bg-white/80 transition-colors duration-300" />
               </Link>
             </motion.div>
           </div>
         </div>
 
-        {/* Right - Landscape with Floating Image (1/3) */}
-        <div className="relative overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: 'url(/images/fondoPiedras.avif)' }}
-          />
-          
+        {/* Right - Black panel with subtle gradient */}
+        <div className="relative overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black">
+          {/* RC Mark Animation - Desktop */}
           <motion.div 
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[65%] aspect-[3/4] shadow-2xl"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.8, duration: 1 }}
+            className="absolute inset-0 flex items-center justify-center"
           >
-            <div className="relative w-full h-full">
-              <div className="absolute left-0 top-0 bottom-0 w-[30%] bg-[var(--color-orange)]/85 z-10" />
-              <img
-                src="/images/nq blanco.png"
-                alt="Colección RUNE CODE"
-                className="w-full h-full object-cover"
-              />
+            <div className="relative">
+              <motion.span
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.2, duration: 0.6 }}
+                className="font-display text-[8rem] xl:text-[10rem] text-[var(--color-orange)] leading-none tracking-tight"
+              >
+                R
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.4, duration: 0.6 }}
+                className="font-display text-[8rem] xl:text-[10rem] text-white leading-none tracking-tight -ml-4"
+              >
+                C
+              </motion.span>
+              {/* Subtle glow effect */}
+              <div className="absolute inset-0 blur-3xl bg-[var(--color-orange)]/10 -z-10" />
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Mobile Layout - Like Wix Reference */}
-      <div className="lg:hidden flex flex-col min-h-[calc(100vh-4rem)]">
-        {/* Main Hero */}
-        <div className="relative flex-1 bg-[var(--color-orange)]">
+      {/* ============================================
+          MOBILE LAYOUT - Modern Full-Screen Hero
+          ============================================ */}
+      <div className="lg:hidden relative h-[calc(100vh-4rem)] overflow-hidden">
+        {/* Background - Orange fallback */}
+        <div className="absolute inset-0 bg-[var(--color-orange)]" />
+        
+        {/* Hero Image - Mobile optimized version */}
+        <motion.div
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          className="absolute inset-0"
+        >
           <img
-            src="/images/MujerRemeraBanner.png"
+            src="/images/MujerRemeraBannerMovil.png"
             alt="Modelo RUNE CODE"
-            className="w-full h-full object-cover"
-            style={{ objectPosition: '50% 15%' }}
+            className="w-full h-full object-cover object-center"
           />
-          
-          {/* Text Overlay */}
-          <div className="absolute bottom-8 left-6 right-6 sm:left-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
+        </motion.div>
+
+        {/* Gradient Overlays for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
+        
+        {/* Content Container - Positioned over image */}
+        <div className="absolute inset-0 flex flex-col justify-end pb-8 px-6 sm:px-8">
+          {/* Main Text Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="mb-8"
+          >
+            <h1 className="font-display text-white text-[2rem] sm:text-[2.5rem] tracking-[0.15em] leading-[1.2] italic mb-6">
+              ENCUENTRA<br />
+              TU ESENCIA<br />
+              <span className="text-[var(--color-orange)]">CON RUNE CODE</span>
+            </h1>
+            
+            <Link 
+              to="/catalogo" 
+              className="inline-flex items-center gap-3 group"
             >
-              <h1 className="font-display text-white text-[1.75rem] sm:text-3xl tracking-[0.1em] leading-[1.2] italic mb-5">
-                ENCUENTRA TU<br />
-                ESENCIA CON<br />
-                RUNE CODE
-              </h1>
-              
-              <Link to="/catalogo" className="inline-block">
-                <span className="font-body text-xs tracking-[0.12em] text-[var(--color-orange)]">
-                  VER COLECCIÓN
-                </span>
-                <div className="h-[1px] bg-[var(--color-orange)] mt-1" />
-              </Link>
-            </motion.div>
-          </div>
+              <span className="font-body text-sm tracking-[0.2em] text-white uppercase">
+                Ver Colección
+              </span>
+              <motion.span 
+                className="text-white text-xl"
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                →
+              </motion.span>
+            </Link>
+          </motion.div>
+
+          {/* RC Mark - Small elegant version at bottom */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            className="flex items-center justify-center gap-1 mb-2"
+          >
+            <span className="font-display text-4xl text-[var(--color-orange)] leading-none">R</span>
+            <span className="font-display text-4xl text-white/80 leading-none">C</span>
+          </motion.div>
+          
+          {/* Subtle scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            transition={{ delay: 1.5, duration: 0.5 }}
+            className="flex justify-center"
+          >
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-[1px] h-8 bg-white/40"
+            />
+          </motion.div>
         </div>
 
-        {/* Secondary - Landscape with Card */}
-        <div className="relative h-52 sm:h-64">
-          <img
-            src="/images/fondoPiedras.avif"
-            alt="Paisaje"
-            className="w-full h-full object-cover"
-          />
-          
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[55%] aspect-[3/4] shadow-xl">
-            <div className="relative w-full h-full">
-              <div className="absolute left-0 top-0 bottom-0 w-[25%] bg-[var(--color-orange)]/80 z-10" />
-              <img
-                src="/images/nq blanco.png"
-                alt="Colección"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
+        {/* Decorative Elements */}
+        {/* Orange accent line - right */}
+        <motion.div
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="absolute top-20 right-4 w-[2px] h-24 bg-[var(--color-orange)] origin-top"
+        />
+        
+        {/* Corner accent */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
+          className="absolute bottom-0 right-0 w-0 h-0"
+          style={{
+            borderRight: '60px solid var(--color-orange)',
+            borderTop: '60px solid transparent',
+          }}
+        />
       </div>
     </section>
   )

@@ -5,14 +5,14 @@ const tiles = [
   {
     id: 1,
     title: 'NUEVAS\nTENDENCIAS',
-    image: 'https://static.wixstatic.com/media/ea26fd_009d35a5ba2d46cab1ed6f151db97449~mv2_d_1920_2097_s_2.jpg',
+    image: '/images/WhatsApp Image 2026-01-11 at 5.34.32 PM.jpeg',
     link: '/catalogo',
     overlayPosition: 'bottom-left',
   },
   {
     id: 2,
     title: 'FAVORITOS DE\nLA TEMPORADA',
-    image: 'https://static.wixstatic.com/media/ea26fd_de3ce029dcf54045ae136ddefd1cb5b5~mv2_d_1920_2097_s_2.jpg',
+    image: '/images/Modelo1.png',
     link: '/catalogo',
     overlayPosition: 'bottom-right',
   },

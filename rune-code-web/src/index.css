@@ -186,3 +186,28 @@ body {
   height: 100%;
   object-fit: cover;
 }
+.hero-title {
+  font-size: 50px;
+  line-height: 1.5em;
+  font-weight: 600;
+  font-style: normal;          /* clave: quitar itálica */
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-line {
+  display: block;
+  letter-spacing: 0.3em;       /* esto es lo que hace que se vea pro */
+  color: #ffffff;
+}
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 32px;
+    line-height: 1.4em;
+  }
+
+  .hero-line {
+    letter-spacing: 0.22em;
+  }
+}

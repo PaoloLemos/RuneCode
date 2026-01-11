@@ -44,17 +44,41 @@ const HeaderNav = () => {
       }`}
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between h-16 md:h-[70px]">
+        {/* Mobile Layout - Centered brand */}
+        <div className="flex md:hidden items-center justify-between h-16 px-1">
+          {/* Spacer for balance */}
+          <div className="w-10" />
+          
+          {/* Centered Brand - Large & Impactful */}
+          <Link 
+            to="/"
+            className="font-display text-[1.65rem] sm:text-3xl tracking-[0.22em] text-white hover:text-[var(--color-orange)] transition-colors duration-300 z-50 text-center"
+          >
+            RUNE CODE
+          </Link>
+          
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 text-white z-50"
+            aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+          >
+            {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden md:flex items-center justify-between h-[70px]">
           {/* Brand */}
           <Link 
             to="/"
-            className="font-display text-xl md:text-2xl tracking-[0.25em] text-white hover:text-[var(--color-orange)] transition-colors duration-300 z-50"
+            className="font-display text-2xl tracking-[0.25em] text-white hover:text-[var(--color-orange)] transition-colors duration-300 z-50"
           >
             RUNE CODE
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center justify-center absolute left-1/2 -translate-x-1/2">
+          <nav className="flex items-center justify-center absolute left-1/2 -translate-x-1/2">
             <ul className="flex items-center gap-8 lg:gap-12">
               {navItems.map((item) => (
                 <li key={item.path}>
@@ -72,15 +96,6 @@ const HeaderNav = () => {
               ))}
             </ul>
           </nav>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-white z-50"
-            aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-          >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
         </div>
       </div>
 
@@ -88,12 +103,12 @@ const HeaderNav = () => {
       {isMenuOpen && (
         <div className="md:hidden fixed inset-0 bg-[#262626] z-40">
           {/* Header with X */}
-          <div className="flex items-center justify-end h-16 px-4">
+          <div className="flex items-center justify-end h-16 px-5">
             <button
               onClick={() => setIsMenuOpen(false)}
               className="p-2 text-white"
             >
-              <X size={28} />
+              <X size={26} />
             </button>
           </div>
           

@@ -5,7 +5,7 @@ import BigHeadline from '../components/BigHeadline'
 
 const Home = () => {
   return (
-    <Layout noBackground>
+    <Layout>
       <HeroSplit />
       <FeatureTiles />
       <BigHeadline />

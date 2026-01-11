@@ -69,8 +69,7 @@ const Footer = () => {
           className="mt-12 pt-8 border-t border-white/10 text-center"
         >
           <p className="font-body text-xs text-white/40 tracking-wide">
-            © 2023 Creado por IN.EX
-          </p>
+            © 2026 Creado por P.L           </p>
         </motion.div>
       </div>
     </footer>
