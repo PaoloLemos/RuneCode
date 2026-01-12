@@ -31,7 +31,7 @@ const HeroSplit = () => {
               transition={{ delay: 0.6, duration: 0.8 }}
             >
 
-<section className="hero">
+<section className="hero"></section>
             <h4 className="hero-title">
   <span className="hero-line">ENCUENTRA</span>
   <span className="hero-line">TU ESENCIA</span>
