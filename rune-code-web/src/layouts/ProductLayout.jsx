@@ -1,16 +1,14 @@
 import { Outlet } from "react-router-dom"
 import HeaderNav from "../components/HeaderNav"
-import Footer from "../components/Footer"
 
-export default function MainLayout() {
+export default function ProductLayout() {
   return (
     <>
       <HeaderNav />
       <main className="bg-white">
         <Outlet />
       </main>
-
-      <Footer />
     </>
   )
 }
+

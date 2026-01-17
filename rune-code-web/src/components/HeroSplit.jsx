@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 const HeroSplit = () => {
   return (
-    <section className="relative min-h-screen pt-16 md:pt-[70px]">
+    <section className="relative min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-70px)]">
       {/* Desktop Layout */}
       <div className="hidden lg:grid lg:grid-cols-3 min-h-[calc(100vh-70px)]">
         {/* Left - Woman with Orange Background (2/3) */}
@@ -109,16 +109,15 @@ const HeroSplit = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
         
-        {/* Content Container - Positioned over image */}
-        <div className="absolute inset-0 flex flex-col justify-end pb-8 px-6 sm:px-8">
+        {/* Content Container - Centered vertically, aligned left */}
+        <div className="absolute inset-0 flex flex-col justify-center px-6 sm:px-8 pb-24">
           {/* Main Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="mb-8"
           >
-            <h1 className="font-display text-white text-[2rem] sm:text-[2.5rem] tracking-[0.15em] leading-[1.2] italic mb-6">
+            <h1 className="font-display text-white text-[3rem] sm:text-[4rem] tracking-[0.1em] leading-[1.5] italic mb-8">
               ENCUENTRA<br />
               TU ESENCIA<br />
               <span className="text-[var(--color-orange)]">CON RUNE CODE</span>
@@ -140,7 +139,10 @@ const HeroSplit = () => {
               </motion.span>
             </Link>
           </motion.div>
+        </div>
 
+        {/* Bottom Elements Container */}
+        <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center">
           {/* RC Mark - Small elegant version at bottom */}
           <motion.div
             initial={{ opacity: 0 }}

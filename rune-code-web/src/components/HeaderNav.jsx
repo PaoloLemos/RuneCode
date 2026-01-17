@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { createPortal } from 'react-dom'
 import { Menu, X } from 'lucide-react'
 
 const navItems = [
@@ -11,8 +12,29 @@ const navItems = [
 
 const HeaderNav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuVisible, setIsMenuVisible] = useState(false) // Para controlar la animación
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
+
+  // Manejar apertura con animación
+  const openMenu = useCallback(() => {
+    setIsMenuOpen(true)
+    // Pequeño delay para que el DOM se renderice antes de animar
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setIsMenuVisible(true)
+      })
+    })
+  }, [])
+
+  // Manejar cierre con animación
+  const closeMenu = useCallback(() => {
+    setIsMenuVisible(false)
+    // Esperar a que termine la animación antes de desmontar
+    setTimeout(() => {
+      setIsMenuOpen(false)
+    }, 400) // Duración de la animación
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,10 +44,12 @@ const HeaderNav = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Cerrar menú al cambiar de ruta
   useEffect(() => {
-    setIsMenuOpen(false)
-  }, [location])
+    closeMenu()
+  }, [location, closeMenu])
 
+  // Bloquear scroll del body cuando el menú está abierto
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden'
@@ -37,106 +61,157 @@ const HeaderNav = () => {
     }
   }, [isMenuOpen])
 
+  // Cerrar menú con tecla ESC
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        closeMenu()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isMenuOpen, closeMenu])
+
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/95 backdrop-blur-sm' : 'bg-black'
-      }`}
-    >
-      <div className="container-custom">
-        {/* Mobile Layout - Centered brand */}
-        <div className="flex md:hidden items-center justify-between h-16 px-1">
-          {/* Spacer for balance */}
-          <div className="w-10" />
-          
-          {/* Centered Brand - Large & Impactful */}
-          <Link 
-            to="/"
-            className="font-display text-[1.65rem] sm:text-3xl tracking-[0.22em] text-white hover:text-[var(--color-orange)] transition-colors duration-300 z-50 text-center"
-          >
-            RUNE CODE
-          </Link>
-          
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 text-white z-50"
-            aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-          >
-            {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
-          </button>
-        </div>
-
-        {/* Desktop Layout */}
-        <div className="hidden md:flex items-center justify-between h-[70px]">
-          {/* Brand */}
-          <Link 
-            to="/"
-            className="font-display text-2xl tracking-[0.25em] text-white hover:text-[var(--color-orange)] transition-colors duration-300 z-50"
-          >
-            RUNE CODE
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="flex items-center justify-center absolute left-1/2 -translate-x-1/2">
-            <ul className="flex items-center gap-8 lg:gap-12">
-              {navItems.map((item) => (
-                <li key={item.path}>
-                  <Link
-                    to={item.path}
-                    className={`font-body text-sm tracking-[0.1em] transition-colors duration-300 ${
-                      location.pathname === item.path 
-                        ? 'text-[var(--color-orange)]' 
-                        : 'text-white hover:text-[var(--color-orange)]'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </div>
-
-      {/* Mobile Menu - Like Wix Reference */}
-      {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 bg-[#262626] z-40">
-          {/* Header with X */}
-          <div className="flex items-center justify-end h-16 px-5">
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="p-2 text-white"
+    <>
+      <header 
+        className={`sticky top-0 z-50 transition-all duration-300 ${
+          isScrolled ? 'bg-black/95 backdrop-blur-sm' : 'bg-black'
+        }`}
+      >
+        <div className="container-custom">
+          {/* Mobile Layout - Centered brand */}
+          <div className="flex md:hidden items-center justify-between h-16 px-1">
+            {/* Spacer for balance */}
+            <div className="w-10" />
+            
+            {/* Centered Brand - Large & Impactful */}
+            <Link 
+              to="/"
+              className="font-brand text-[1.65rem] sm:text-3xl text-white hover:text-[var(--color-orange)] transition-colors duration-300 text-center"
             >
-              <X size={26} />
+              RUNE CODE
+            </Link>
+            
+            {/* Mobile Menu Toggle - Solo muestra hamburguesa (la X está en el overlay) */}
+            <button
+              onClick={openMenu}
+              className="p-2 text-white"
+              aria-label="Abrir menú"
+              aria-expanded={isMenuOpen}
+            >
+              <Menu size={26} />
             </button>
           </div>
-          
-          {/* Menu Items */}
-          <nav className="px-6 pt-8">
-            <ul className="flex flex-col">
-              {navItems.map((item, index) => (
+
+          {/* Desktop Layout */}
+          <div className="hidden md:flex items-center justify-between h-[70px]">
+            {/* Brand */}
+            <Link 
+              to="/"
+              className="font-brand text-2xl text-white hover:text-[var(--color-orange)] transition-colors duration-300"
+            >
+              RUNE CODE
+            </Link>
+
+            {/* Desktop Navigation */}
+            <nav className="flex items-center justify-center absolute left-1/2 -translate-x-1/2">
+              <ul className="flex items-center gap-8 lg:gap-12">
+                {navItems.map((item) => (
+                  <li key={item.path}>
+                    <Link
+                      to={item.path}
+                      className={`font-body text-sm tracking-[0.1em] transition-colors duration-300 ${
+                        location.pathname === item.path 
+                          ? 'text-[var(--color-orange)]' 
+                          : 'text-white hover:text-[var(--color-orange)]'
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Menu Overlay - Portal al body para evitar stacking context issues */}
+      {isMenuOpen && createPortal(
+        <div
+          className="fixed inset-0 flex flex-col items-center justify-center"
+          style={{
+            zIndex: 9999,
+            backgroundColor: '#262626',
+            height: '100dvh',
+            width: '100vw',
+            paddingBottom: '20vh',
+            // Animación slide desde arriba
+            transform: isMenuVisible ? 'translateY(0)' : 'translateY(-100%)',
+            transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menú de navegación"
+          onClick={(e) => {
+            // Cerrar al hacer clic fuera del menú (en el overlay)
+            if (e.target === e.currentTarget) {
+              closeMenu()
+            }
+          }}
+        >
+          {/* Botón cerrar (X) - Único, esquina superior derecha */}
+          <button
+            onClick={closeMenu}
+            className="absolute top-6 right-6 p-2 text-white hover:text-[var(--color-orange)] transition-colors duration-300"
+            aria-label="Cerrar menú"
+            style={{
+              opacity: isMenuVisible ? 1 : 0,
+              transition: 'opacity 0.3s ease 0.2s',
+            }}
+          >
+            <X size={24} strokeWidth={1} />
+          </button>
+
+          {/* Menu Items - Centrados horizontal y verticalmente (con offset hacia arriba) */}
+          <nav 
+            className="w-full flex justify-center px-12"
+            style={{
+              opacity: isMenuVisible ? 1 : 0,
+              transform: isMenuVisible ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s',
+            }}
+          >
+            <ul className="flex flex-col items-center" style={{ width: '280px' }}>
+              {navItems.map((item) => (
                 <li 
                   key={item.path}
-                  className={`border-b border-white/20 ${index === 0 ? 'border-t' : ''}`}
+                  className="w-full flex flex-col items-center"
                 >
+                  {/* Línea separadora arriba de cada item */}
+                  <div className="w-full h-px bg-white/20" />
                   <Link
                     to={item.path}
-                    className={`block py-5 text-center font-body text-xl tracking-[0.15em] transition-colors duration-300 ${
+                    onClick={closeMenu}
+                    className={`block py-6 text-center font-body text-[26px] tracking-[0.32em] uppercase transition-colors duration-300 ${
                       location.pathname === item.path 
                         ? 'text-[var(--color-orange)]' 
-                        : 'text-white'
+                        : 'text-white/80 hover:text-white'
                     }`}
                   >
                     {item.name}
                   </Link>
                 </li>
               ))}
+              {/* Línea final debajo del último item */}
+              <div className="w-full h-px bg-white/20" />
             </ul>
           </nav>
-        </div>
+        </div>,
+        document.body
       )}
-    </header>
+    </>
   )
 }
 
