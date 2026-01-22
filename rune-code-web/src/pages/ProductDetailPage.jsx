@@ -205,24 +205,34 @@ const ProductDetailPage = () => {
           )}
 
           {/* CTA Button */}
-          <motion.button
-            onClick={handleWhatsAppClick}
-            whileHover={selectedSize ? { scale: 1.02 } : {}}
-            whileTap={selectedSize ? { scale: 0.98 } : {}}
-            className={`w-full py-4 flex items-center justify-center gap-3 font-display tracking-[0.15em] text-sm flex-shrink-0 transition-all duration-300 ${
-              selectedSize 
-                ? 'bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/40' 
-                : 'bg-gray-200 text-gray-500 cursor-not-allowed'
-            }`}
-          >
-            <motion.span
-              animate={selectedSize ? { rotate: [0, -10, 10, -5, 5, 0] } : {}}
-              transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 3 }}
+          {product.inStock === false ? (
+            <div className="w-full py-4 flex items-center justify-center gap-3 font-display tracking-[0.15em] text-sm flex-shrink-0 bg-gradient-to-r from-red-800 via-red-700 to-red-800 text-white/90">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+              </svg>
+              SOLD OUT
+            </div>
+          ) : (
+            <motion.button
+              onClick={handleWhatsAppClick}
+              whileHover={selectedSize ? { scale: 1.02 } : {}}
+              whileTap={selectedSize ? { scale: 0.98 } : {}}
+              className={`w-full py-4 flex items-center justify-center gap-3 font-display tracking-[0.15em] text-sm flex-shrink-0 transition-all duration-300 ${
+                selectedSize 
+                  ? 'bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/40' 
+                  : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+              }`}
             >
-              <MessageCircle size={20} />
-            </motion.span>
-            COMPRAR POR WHATSAPP
-          </motion.button>
+              <motion.span
+                animate={selectedSize ? { rotate: [0, -10, 10, -5, 5, 0] } : {}}
+                transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 3 }}
+              >
+                <MessageCircle size={20} />
+              </motion.span>
+              COMPRAR POR WHATSAPP
+            </motion.button>
+          )}
 
           <p className="mt-3 text-center text-[10px] uppercase tracking-widest text-black/50 font-body flex-shrink-0">
             IVA incluido. Envío calculado al finalizar la compra.

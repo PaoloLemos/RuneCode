@@ -41,28 +41,67 @@ const Catalogo = () => {
 }
 
 const ProductCard = ({ product, index }) => {
+  const isOutOfStock = product.inStock === false
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ delay: index * 0.08, duration: 0.5 }}
-      className="group relative aspect-[4/5] w-full overflow-hidden cursor-pointer"
+      className={`group relative aspect-square w-full overflow-hidden ${isOutOfStock ? 'cursor-not-allowed' : 'cursor-pointer'}`}
     >
-      <Link to={`/producto/${product.id}`} className="block w-full h-full">
+      <Link 
+        to={isOutOfStock ? '#' : `/producto/${product.id}`} 
+        className="block w-full h-full"
+        onClick={(e) => isOutOfStock && e.preventDefault()}
+      >
         {/* Product Image - Square, no rounded corners */}
         <img
           src={product.images[0]}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className={`w-full h-full object-cover transition-all duration-700 ${
+            isOutOfStock 
+              ? 'grayscale brightness-75' 
+              : 'group-hover:scale-105'
+          }`}
         />
         
-        {/* Hover Overlay - Darkens and shows name */}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-400 flex items-center justify-center">
-          <h3 className="font-display text-white text-xl sm:text-2xl lg:text-3xl tracking-[0.15em] text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-400 transform translate-y-4 group-hover:translate-y-0">
-            {product.name}
-          </h3>
-        </div>
+        {/* Out of Stock Overlay */}
+        {isOutOfStock && (
+          <>
+            {/* Permanent dark overlay */}
+            <div className="absolute inset-0 bg-black/40" />
+            
+            {/* Diagonal ribbon */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div 
+                className="absolute w-[150%] bg-gradient-to-r from-red-800 via-red-700 to-red-800 py-3 sm:py-4 shadow-xl"
+                style={{ transform: 'rotate(-35deg)' }}
+              >
+                <p className="text-white font-display text-sm sm:text-base md:text-lg tracking-[0.3em] text-center uppercase">
+                  Sold Out
+                </p>
+              </div>
+            </div>
+            
+            {/* Product name still visible */}
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+              <h3 className="font-display text-white/80 text-lg sm:text-xl tracking-[0.15em] text-center">
+                {product.name}
+              </h3>
+            </div>
+          </>
+        )}
+        
+        {/* Hover Overlay - Only for in-stock items */}
+        {!isOutOfStock && (
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-400 flex items-center justify-center">
+            <h3 className="font-display text-white text-xl sm:text-2xl lg:text-3xl tracking-[0.15em] text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-400 transform translate-y-4 group-hover:translate-y-0">
+              {product.name}
+            </h3>
+          </div>
+        )}
       </Link>
     </motion.div>
   )

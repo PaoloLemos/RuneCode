@@ -1,12 +1,34 @@
 export const products = [
   {
+    id: 4,
+    name: 'AURA TEE',
+    price: 859,
+    description: 'Nuestra Aura Tee destaca por su diseño minimalista y corte premium. Una pieza esencial que eleva cualquier conjunto.',
+    images: ['/images/remeraNegraModelo.png', '/images/remeraNegraModeloFrente.png', '/images/remeraNegraFrente.jpeg', '/images/remeraNegraMovimiento.jpeg', '/images/remeraNegraTren.jpeg'],
+    sizes: ['S', 'M', 'L'],
+    colors: ['Crema'],
+    inStock: true,
+  },
+  
+  {
+    id: 5,
+    name: 'NEVER QUIT BORDO',
+    price: 859,
+    description: 'Nuestra Aura Tee destaca por su diseño minimalista y corte premium. Una pieza esencial que eleva cualquier conjunto.',
+    images: ['/images/neverQuitBlackMen.jpeg', '/images/NeverQuitMujerEspalda.jpeg'],
+    sizes: ['S', 'M', 'L'],
+    colors: ['Crema'],
+    inStock: true,
+  },
+  {
     id: 1,
     name: 'RENAISSANCE TEE',
     price: 859,
     description: 'Nuestra remera Renaissance captura la esencia del arte clásico en un formato moderno. Confeccionada con algodón de alta calidad para máxima comodidad.',
-    images: ['/images/angelRemera.jpeg'],
+    images: [ '/images/remeraReinModeloEspalda.PNG', '/images/remeraReinModeloFrente.jpeg', '/images/ReinMujerEspalda.jpeg','/images/angelEspalda.jpeg', '/images/remeraReinCollage.jpeg'],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Blanco', 'Negro'],
+    inStock: true,
   },
   {
     id: 2,
@@ -16,6 +38,7 @@ export const products = [
     images: ['/images/neverQuitAzul.jpeg', '/images/neverQuitAzulAtras.jpeg'],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Azul'],
+    inStock: false,
   },
   {
     id: 3,
@@ -25,15 +48,7 @@ export const products = [
     images: ['/images/NeverQuitMarron.jpeg'],
     sizes: ['M', 'L', 'XL'],
     colors: ['Marrón'],
-  },
-  {
-    id: 4,
-    name: 'AURA TEE',
-    price: 859,
-    description: 'Nuestra Aura Tee destaca por su diseño minimalista y corte premium. Una pieza esencial que eleva cualquier conjunto.',
-    images: ['/images/AuraRemera.jpeg', '/images/AuraRemeraFrente.jpeg'],
-    sizes: ['S', 'M', 'L'],
-    colors: ['Crema'],
+    inStock: false,
   },
 ];
 
