@@ -3,7 +3,7 @@ import { Instagram } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer className="relative bg-black py-12 sm:py-16 border-t border-white/10">
+    <footer className="relative bg-black py-20 sm:py-32 min-h-[280px] border-t border-white/10">
       {/* Solid black background to cover any background image bleeding */}
       <div className="absolute inset-0 bg-black" />
       
@@ -66,12 +66,23 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="mt-12 pt-8 border-t border-white/10 text-center"
+          className="mt-20 pt-12 border-t border-white/10 text-center"
         >
           <p className="font-body text-xs text-white/40 tracking-wide">
-            © 2026 Creado por P.L           </p>
+          </p>
         </motion.div>
       </div>
+      
+      {/* Creator credit - positioned at bottom */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="absolute bottom-4 left-0 right-0 text-center font-body text-xs text-white/30 tracking-wide"
+      >
+       © 2026 RUNE CODE  Creado por P.L
+      </motion.p>
     </footer>
   )
 }

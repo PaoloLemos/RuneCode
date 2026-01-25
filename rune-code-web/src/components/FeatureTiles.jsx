@@ -5,14 +5,14 @@ const tiles = [
   {
     id: 1,
     title: 'NUEVAS\nTENDENCIAS',
-    image: '/images/WhatsApp Image 2026-01-11 at 5.34.32 PM.jpeg',
+    image: '/images/neverBordoPortada.png',
     link: '/catalogo',
     overlayPosition: 'bottom-left',
   },
   {
     id: 2,
     title: 'FAVORITOS DE\nLA TEMPORADA',
-    image: '/images/Modelo1.png',
+    image: '/images/angelPortada.jpeg',
     link: '/catalogo',
     overlayPosition: 'bottom-right',
   },
