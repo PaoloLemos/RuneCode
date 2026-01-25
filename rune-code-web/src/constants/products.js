@@ -2,7 +2,7 @@ export const products = [
   {
     id: 4,
     name: 'AURA TEE',
-    price: 859,
+    price: 899,
     description: 'Nuestra Aura Tee destaca por su diseño minimalista y corte premium. Una pieza esencial que eleva cualquier conjunto.',
     images: ['/images/remeraNegraModelo.png', '/images/remeraNegraModeloFrente.png', '/images/remeraNegraFrente.jpeg', '/images/remeraNegraMovimiento.jpeg', '/images/remeraNegraTren.jpeg'],
     sizes: ['S', 'M', 'L'],
@@ -13,7 +13,7 @@ export const products = [
   {
     id: 5,
     name: 'NEVER QUIT BORDO',
-    price: 859,
+    price: 899,
     description: 'Nuestra Aura Tee destaca por su diseño minimalista y corte premium. Una pieza esencial que eleva cualquier conjunto.',
     images: ['/images/neverQuitBlackMen.jpeg', '/images/NeverQuitMujerEspalda.jpeg', '/images/neverQuitBordo.jpeg','/images/neverQuitBordoFrente.jpeg','/images/neverQuitBordoReja.jpeg'],
     sizes: ['S', 'M', 'L'],
@@ -23,7 +23,7 @@ export const products = [
   {
     id: 1,
     name: 'RENAISSANCE TEE',
-    price: 859,
+    price: 799,
     description: 'Nuestra remera Renaissance captura la esencia del arte clásico en un formato moderno. Confeccionada con algodón de alta calidad para máxima comodidad.',
     images: [ '/images/remeraReinModeloEspalda.PNG', '/images/remeraReinModeloFrente.jpeg', '/images/ReinMujerEspalda.jpeg','/images/angelEspalda.jpeg', '/images/remeraReinCollage.jpeg'],
     sizes: ['S', 'M', 'L', 'XL'],
@@ -33,7 +33,7 @@ export const products = [
   {
     id: 6,
     name: 'Remera de TINI',
-    price: 859,
+    price: 799,
     description: 'Remera de Tini para el concierto el 22 de febrero.',
     images: ['/images/tiniModelo.jpg.jpeg', '/images/tini.png' ],
     sizes: ['S', 'M', 'L'],
