@@ -33,7 +33,7 @@ export const products = [
   {
     id: 6,
     name: 'Remera de TINI',
-    price: 799,
+    price: 599,
     description: 'Remera de Tini para el concierto el 22 de febrero.',
     images: ['/images/tiniModelo.jpg.jpeg', '/images/tini.png' ],
     sizes: ['S', 'M', 'L'],
